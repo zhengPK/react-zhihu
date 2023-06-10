@@ -71,7 +71,7 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const lessRegex = /\.less$/;
 const lessModuleRegex = /\.module\.less$/;
-
+const px2rem = require('postcss-pxtorem')
 const hasJsxRuntime = (() => {
   if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true') {
     return false;
@@ -147,6 +147,10 @@ module.exports = function (webpackEnv = 'development') {
                   // so that it honors browserslist config in package.json
                   // which in turn let's users customize the target behavior as per their needs.
                   'postcss-normalize',
+                  px2rem({
+                    rootValue:75,
+                    propList:['*'],//对那些文件生效
+                  })
                 ]
               : [
                   'tailwindcss',
@@ -160,6 +164,10 @@ module.exports = function (webpackEnv = 'development') {
                       stage: 3,
                     },
                   ],
+                  px2rem({
+                    rootValue:75,
+                    propList:['*'],//对那些文件生效
+                  })
                 ],
           },
           sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
@@ -416,6 +424,7 @@ module.exports = function (webpackEnv = 'development') {
                     require.resolve('babel-preset-react-app'),
                     {
                       runtime: hasJsxRuntime ? 'automatic' : 'classic',
+                      targets:{"chrome": "49", "ios": "10"}
                     },
                   ],
                 ],

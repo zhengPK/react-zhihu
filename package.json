@@ -139,7 +139,10 @@
     ]
   },
   "devDependencies": {
+    "antd-mobile": "^5.30.0",
     "http-proxy-middleware": "^2.0.6",
-    "less-loader": "^8.1.1"
+    "less-loader": "^8.1.1",
+    "react-router-dom": "^6.11.2",
+    "styled-components": "^5.3.10"
   }
 }
